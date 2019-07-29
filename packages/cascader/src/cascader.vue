@@ -112,21 +112,21 @@
 </template>
 
 <script>
-import Popper from 'element-ui/src/utils/vue-popper';
-import Clickoutside from 'element-ui/src/utils/clickoutside';
-import Emitter from 'element-ui/src/mixins/emitter';
-import Locale from 'element-ui/src/mixins/locale';
-import Migrating from 'element-ui/src/mixins/migrating';
-import ElInput from 'element-ui/packages/input';
-import ElTag from 'element-ui/packages/tag';
-import ElScrollbar from 'element-ui/packages/scrollbar';
-import ElCascaderPanel from 'element-ui/packages/cascader-panel';
-import AriaUtils from 'element-ui/src/utils/aria-utils';
-import { t } from 'element-ui/src/locale';
-import { isEqual, isEmpty, kebabCase } from 'element-ui/src/utils/util';
-import { isUndefined, isFunction } from 'element-ui/src/utils/types';
-import { isDef } from 'element-ui/src/utils/shared';
-import { addResizeListener, removeResizeListener } from 'element-ui/src/utils/resize-event';
+import Popper from 'mdc-element-ui/src/utils/vue-popper';
+import Clickoutside from 'mdc-element-ui/src/utils/clickoutside';
+import Emitter from 'mdc-element-ui/src/mixins/emitter';
+import Locale from 'mdc-element-ui/src/mixins/locale';
+import Migrating from 'mdc-element-ui/src/mixins/migrating';
+import ElInput from 'mdc-element-ui/packages/input';
+import ElTag from 'mdc-element-ui/packages/tag';
+import ElScrollbar from 'mdc-element-ui/packages/scrollbar';
+import ElCascaderPanel from 'mdc-element-ui/packages/cascader-panel';
+import AriaUtils from 'mdc-element-ui/src/utils/aria-utils';
+import { t } from 'mdc-element-ui/src/locale';
+import { isEqual, isEmpty, kebabCase } from 'mdc-element-ui/src/utils/util';
+import { isUndefined, isFunction } from 'mdc-element-ui/src/utils/types';
+import { isDef } from 'mdc-element-ui/src/utils/shared';
+import { addResizeListener, removeResizeListener } from 'mdc-element-ui/src/utils/resize-event';
 import debounce from 'throttle-debounce/debounce';
 
 const { keys: KeyCode } = AriaUtils;
@@ -308,12 +308,13 @@ export default {
     },
     checkedValue(val) {
       const { value, dropDownVisible } = this;
-      const { checkStrictly, multiple } = this.config;
+      const { multiple } = this.config;
 
       if (!isEqual(val, value) || isUndefined(value)) {
         this.computePresentContent();
         // hide dropdown when single mode
-        if (!multiple && !checkStrictly && dropDownVisible) {
+        // NOTE: v1.0.0 Remove [&& !checkStrictly]
+        if (!multiple && dropDownVisible) {
           this.toggleDropDownVisible(false);
         }
 

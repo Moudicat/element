@@ -1,7 +1,7 @@
 <script>
-  import ElCheckbox from 'element-ui/packages/checkbox';
-  import ElRadio from 'element-ui/packages/radio';
-  import { isEqual } from 'element-ui/src/utils/util';
+  import ElCheckbox from 'mdc-element-ui/packages/checkbox';
+  import ElRadio from 'mdc-element-ui/packages/radio';
+  import { isEqual } from 'mdc-element-ui/src/utils/util';
 
   const stopPropagation = e => e.stopPropagation();
 
@@ -218,7 +218,8 @@
             this.$emit('expand', e);
           };
         }
-      } else if (!isDisabled && !checkStrictly && !multiple) {
+        // NOTE: 1.0.0 Remove [&& !checkStrictly]
+      } else if (!isDisabled && !multiple) {
         events.on.click = this.handleCheckChange;
       }
 
